@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#07111f">
+<title>Ahmed Farouk | Cybersecurity Academy V4</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Orbitron:wght@500;700;800&display=swap');
+:root{--bg:#060c17;--panel:#0c1728;--panel2:#101f34;--line:#203752;--cyan:#00dcf5;--blue:#477dff;--green:#35dfa6;--txt:#eff7ff;--muted:#9aadc4;--red:#ff7585}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 15% 5%,#102647 0,transparent 35%),var(--bg);color:var(--txt);font-family:Cairo,Arial,sans-serif;min-height:100vh}
+a{color:var(--cyan)}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1450px,94%);margin:auto}
+header{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:20px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.logo{font:800 18px Orbitron;color:var(--cyan);letter-spacing:1px}
+.logo span{color:white}
+nav{display:flex;gap:8px;flex-wrap:wrap}
+.btn,.navbtn{border:1px solid var(--line);background:#102139;color:var(--txt);padding:9px 14px;border-radius:10px}
+.btn:hover,.navbtn:hover,.navbtn.active{border-color:var(--cyan);color:var(--cyan)}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:25px;align-items:center;padding:48px 0 30px}
+.eyebrow{color:var(--cyan);font:700 12px Orbitron;letter-spacing:2px}
+h1{font-size:clamp(32px,5vw,58px);line-height:1.35;margin:10px 0}
+h1 span{color:var(--cyan);text-shadow:0 0 25px #00dcf566}
+p{line-height:1.9}
+.muted{color:var(--muted)}
+.hero p{max-width:700px;color:var(--muted)}
+.heroart{height:240px;border:1px solid #1b4160;border-radius:24px;display:grid;place-items:center;background:radial-gradient(circle,#123e5b 0,#0b1b30 45%,#08111e 75%);position:relative;overflow:hidden}
+.orb{width:165px;height:165px;border:1px solid var(--cyan);border-radius:50%;box-shadow:0 0 45px #00dcf555,inset 0 0 30px #00dcf522;position:relative;animation:spin 18s linear infinite}
+.orb:before,.orb:after{content:"";position:absolute;inset:18px;border:1px solid #478bff;border-radius:50%;transform:rotateX(65deg) rotate(35deg)}
+.orb:after{transform:rotateY(65deg) rotate(-35deg)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:10px 0 25px}
+.stat,.panel,.course,.month{background:linear-gradient(145deg,#0e1b2e,#091321);border:1px solid var(--line);border-radius:16px}
+.stat{padding:17px}
+.stat small{color:var(--muted)}
+.stat strong{display:block;font-size:26px;color:var(--cyan);margin-top:4px}
+.panel{padding:20px;margin:20px 0}
+.progressline{height:10px;border-radius:20px;background:#1b2b40;overflow:hidden;margin-top:13px}
+.progressfill{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan),var(--green));transition:.3s}
+.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:30px 0 14px}
+.sectionhead h2{margin:0;font-size:22px}
+.months{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.month{padding:17px;transition:.2s}
+.month:hover{transform:translateY(-3px);border-color:#00dcf588}
+.month small{color:var(--cyan);font:12px Orbitron}
+.month h3{font-size:17px;margin:10px 0 5px}
+.month p{font-size:13px;color:var(--muted);min-height:48px;margin:5px 0}
+.month .progressline{height:6px;margin:12px 0 7px}
+.monthfoot{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.open{width:100%;margin-top:13px;background:#102943;border:1px solid #24506d;color:var(--cyan);border-radius:9px;padding:10px}
+#academy{display:none}
+.academyhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
+.lessonlist{display:grid;gap:10px;margin:15px 0}
+.lesson{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:#0a192a;border:1px solid var(--line);padding:12px;border-radius:11px}
+.lesson input{width:18px;height:18px;accent-color:var(--green)}
+.lesson label{cursor:pointer;line-height:1.7}
+.lesson.done label{text-decoration:line-through;color:#71879f}
+.lesson button{font-size:12px;padding:7px 10px}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 20px}
+.link{display:inline-block;text-decoration:none;border:1px solid #254661;padding:7px 11px;border-radius:9px;font-size:12px;color:var(--cyan)}
+.link:hover{background:#12314a}
+.player{background:#030811;border:1px solid #24445e;border-radius:15px;overflow:hidden}
+.player iframe{width:100%;aspect-ratio:16/9;border:0;display:block}
+.playerempty{aspect-ratio:16/9;display:grid;place-items:center;text-align:center;padding:25px;color:var(--muted);background:radial-gradient(circle,#122a43,#050b14)}
+.playercontrols{display:flex;gap:8px;flex-wrap:wrap;padding:12px}
+input[type=text],textarea{background:#071321;color:white;border:1px solid var(--line);border-radius:9px;padding:11px;width:100%;outline:none}
+input:focus,textarea:focus{border-color:var(--cyan)}
+.playercontrols input{flex:1;min-width:210px}
+textarea{min-height:100px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.resourcebox{background:#0a192a;border:1px solid var(--line);border-radius:12px;padding:15px}
+.resourcebox h3{margin:0 0 8px;font-size:16px}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.badge{padding:14px;text-align:center;border:1px solid var(--line);border-radius:12px;color:#6f8299;background:#0a1727}
+.badge.on{color:var(--green);border-color:#35dfa655}
+.badge b{display:block;font-size:24px}
+.search{max-width:300px}
+footer{text-align:center;color:var(--muted);font-size:12px;padding:35px 10px}
+.navbtn{transition:.2s}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--cyan);outline-offset:3px}
+.lesson{transition:border-color .2s}
+.lesson:has(input:checked){border-color:#35dfa655}
+.hide{display:none!important}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.heroart{height:180px}.months{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.stats{grid-template-columns:repeat(2,1fr)}.months,.grid2{grid-template-columns:1fr}.badges{grid-template-columns:repeat(2,1fr)}.lesson{grid-template-columns:auto 1fr}.lesson button{grid-column:2;justify-self:start}header{align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <div class="logo">CYBER<span>ACADEMY</span></div>
+ <nav>
+  <button class="navbtn active" onclick="goHome()">الرئيسية</button>
+  <button class="navbtn" onclick="document.getElementById('roadmap').scrollIntoView({behavior:'smooth'})">خريطة الطريق</button>
+  <button class="navbtn" onclick="document.getElementById('badges').scrollIntoView({behavior:'smooth'})">إنجازاتي</button>
+  <button class="navbtn" onclick="exportProgress()">تنزيل نسخة احتياطية</button>
+  <button class="navbtn" onclick="document.getElementById('importFile').click()">استعادة نسخة</button>
+  <input id="importFile" type="file" accept="application/json" hidden onchange="importProgress(event)">
+ </nav>
+</header>
+
+<section class="hero">
+ <div>
+  <div class="eyebrow">PERSONAL LEARNING PLATFORM</div>
+  <h1>AHMED FAROUK<br><span>CYBERSECURITY ACADEMY</span></h1>
+  <p>أكاديميتك التعليمية الخاصة. اتعلم خطوة بخطوة، شاهد الدروس داخل الموقع، افتح المصادر الأصلية، نفّذ مشاريع آمنة، وسجّل تقدمك في رحلة الـ12 شهر.</p>
+  <button class="btn" onclick="document.getElementById('roadmap').scrollIntoView({behavior:'smooth'})">ابدأ التعلم ←</button>
+ </div>
+ <div class="heroart"><div class="orb"></div></div>
+</section>
+
+<section class="stats">
+ <div class="stat"><small>نسبة الإنجاز</small><strong id="percent">0%</strong></div>
+ <div class="stat"><small>الدروس المكتملة</small><strong id="completed">0</strong></div>
+ <div class="stat"><small>إجمالي الدروس</small><strong id="total">0</strong></div>
+ <div class="stat"><small>نقاط الخبرة XP</small><strong id="xp">0</strong></div>
+</section>
+
+<section class="panel">
+ <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap"><b>تقدم رحلتك</b><span class="muted" id="progresslabel">0%</span></div>
+ <div class="progressline"><div class="progressfill" id="mainbar"></div></div>
+ <p class="muted" style="font-size:12px;margin-bottom:0">نصيحة: افهم الدرس وطبّقه في معمل آمن قبل ما تعلّم عليه كمكتمل.</p>
+</section>
+
+<div id="home">
+ <div class="sectionhead" id="roadmap"><h2>🗺️ خريطة الطريق - 12 شهر</h2><input class="search" id="search" type="text" placeholder="ابحث عن شهر أو موضوع..." oninput="renderMonths()"></div>
+ <div class="months" id="months"></div>
+ <section class="panel" id="badges">
+  <div class="sectionhead"><h2>🏆 شارات الإنجاز</h2></div>
+  <div class="badges" id="badgegrid"></div>
+ </section>
+ <section class="panel">
+  <h2>📌 قواعد رحلتك</h2>
+  <p class="muted">ذاكر من ساعتين إلى 3 ساعات يوميًا: درس نظري، تطبيق عملي، ومراجعة مصطلحات إنجليزية. أي اختبار أمني عملي يكون فقط على جهازك أو معمل تدريبي عندك تصريح باستخدامه.</p>
+ </section>
+</div>
+
+<section class="panel" id="academy">
+ <div class="academyhead">
+  <div><div class="eyebrow" id="monthnumber">MONTH 01</div><h2 id="monthtitle"></h2></div>
+  <button class="btn" onclick="goHome()">← رجوع للخريطة</button>
+ </div>
+ <p class="muted" id="monthdesc"></p>
+ <div class="sectionhead"><h2>🎓 دروس ومهام الشهر</h2><span class="muted" id="monthprogress"></span></div>
+ <div class="lessonlist" id="lessons"></div>
+ <div class="grid2">
+  <div class="resourcebox"><h3>📚 كورسات ومصادر رسمية</h3><p class="muted" style="font-size:12px">روابط مباشرة لمحتوى تعليمي موثوق. بعض الكورسات تتطلب تسجيلًا مجانيًا.</p><div class="links" id="courseLinks"></div></div>
+  <div class="resourcebox"><h3>🔎 فيديوهات شرح على YouTube</h3><p class="muted" style="font-size:12px">افتح نتائج البحث واختر المدرس والشرح المناسب. تقدر تشغّل رابط فيديو داخل المشغل بالأسفل إذا كان YouTube يسمح بالتضمين.</p><div class="links" id="videoLinks"></div></div>
+ </div>
+ <div class="sectionhead"><h2>▶️ مشغل الفيديو داخل الأكاديمية</h2></div>
+ <div class="player" id="player"><div class="playerempty"><div><div style="font-size:40px">▶</div><b>مشغل دروسك</b><p>الصق رابط فيديو YouTube بالأسفل لتشغيله هنا.</p></div></div></div>
+ <div class="playercontrols">
+  <input type="text" id="videoUrl" placeholder="الصق رابط YouTube هنا...">
+  <button class="btn" onclick="loadVideo()">تشغيل الفيديو</button>
+  <button class="btn" onclick="clearVideo()">إيقاف</button>
+ </div>
+ <div class="sectionhead"><h2>📝 ملاحظات الشهر</h2><button class="btn" onclick="saveNote()">حفظ الملاحظات</button></div>
+ <textarea id="notes" placeholder="اكتب ملخص الدروس، الأسئلة، والمعلومات المهمة..."></textarea>
+</section>
+
+<footer>AHMED FAROUK • CYBERSECURITY ACADEMY • LEARN RESPONSIBLY</footer>
+</div>
+
+<script>
+const curriculum=[
+{title:"أساسيات الكمبيوتر وأنظمة التشغيل",desc:"ابدأ بفهم مكونات الكمبيوتر وطريقة عمل Windows وLinux والملفات والصلاحيات.",tasks:["تعرف على CPU وRAM وSSD وGPU ووظيفة كل جزء","افهم الفرق بين Hardware وSoftware","تعرف على نظام التشغيل والملفات والمجلدات","استخدم Task Manager لمراقبة موارد جهازك","تعرف على أساسيات Windows وطرق تحديثه","ثبت VirtualBox وتعلم فكرة الأجهزة الافتراضية","شغّل Kali Linux كآلة افتراضية وتعرف على الواجهة","افهم المستخدمين والصلاحيات والنسخ الاحتياطي"],courses:[["Cisco - Introduction to Cybersecurity","https://www.netacad.com/courses/introduction-to-cybersecurity"],["Microsoft Learn - Windows","https://learn.microsoft.com/en-us/training/windows/"],["VirtualBox Manual","https://www.virtualbox.org/manual/"],["Linux Journey","https://linuxjourney.com/"]],videos:["Computer fundamentals explained Arabic","شرح أساسيات الكمبيوتر للمبتدئين بالعربي","VirtualBox Kali Linux installation Arabic"]},
+
+{title:"أساسيات الشبكات Networking",desc:"افهم كيف تتصل الأجهزة والإنترنت، فهذا الأساس الذي ستبني عليه بقية التخصص.",tasks:["تعلم نموذج OSI والطبقات السبع","افهم TCP/IP والفرق بين TCP وUDP","تعرف على IPv4 وIPv6","افهم Subnet Mask وGateway بشكل مبدئي","تعلم DNS وDHCP","افهم HTTP وHTTPS","تعرف على Router وSwitch وFirewall","ابدأ قراءة الحزم في Wireshark على شبكتك"],courses:[["Cisco - Networking Basics","https://www.netacad.com/courses/networking-basics"],["Cisco Skills for All","https://skillsforall.com/"],["Wireshark Documentation","https://www.wireshark.org/docs/"],["Cloudflare Learning - What is DNS?","https://www.cloudflare.com/learning/dns/what-is-dns/"]],videos:["شرح الشبكات للمبتدئين بالعربي Network Fundamentals","شرح OSI Model بالعربي","شرح IP Address وSubnetting بالعربي","Wireshark شرح عربي"]},
+
+{title:"تطبيقات الشبكات وتحليل الاتصال",desc:"وسع فهمك للبروتوكولات والأدوات ومبادئ استكشاف مشاكل الشبكة.",tasks:["راجع أشهر المنافذ والخدمات واستخداماتها","افهم MAC Address وARP نظريًا","تعرف على Routing وSwitching","افهم VPN ومتى يستخدم","استخدم Cisco Packet Tracer لبناء شبكة افتراضية","حل مشاكل اتصال بسيطة في شبكتك","حلل ملف PCAP تدريبيًا باستخدام Wireshark"],courses:[["Cisco Packet Tracer","https://www.netacad.com/cisco-packet-tracer"],["Wireshark Sample Captures","https://wiki.wireshark.org/SampleCaptures"],["Cisco Skills for All","https://skillsforall.com/"]],videos:["شرح Cisco Packet Tracer بالعربي","شرح TCP UDP Ports بالعربي","تحليل Wireshark للمبتدئين بالعربي"]},
+
+{title:"Linux وWindows Administration",desc:"تعلم استخدام الطرفية وإدارة المستخدمين والملفات والخدمات والسجلات.",tasks:["تعلم أوامر Linux الأساسية والتنقل بين المجلدات","افهم Linux File System","تعلم صلاحيات الملفات والمستخدمين","تعرف على Processes وServices","استخدم Bash في مهام بسيطة","تعلم أساسيات PowerShell","افهم Windows Event Viewer والسجلات","حل مستويات البداية من OverTheWire Bandit"],courses:[["Linux Journey","https://linuxjourney.com/"],["OverTheWire Bandit","https://overthewire.org/wargames/bandit/"],["Microsoft Learn","https://learn.microsoft.com/en-us/training/"],["Ubuntu Command Line Tutorial","https://ubuntu.com/tutorials/command-line-for-beginners"]],videos:["Linux للمبتدئين بالعربي شرح التيرمنال","شرح صلاحيات Linux بالعربي","PowerShell للمبتدئين بالعربي","Windows Event Viewer شرح عربي"]},
+
+{title:"Python Programming",desc:"تعلم البرمجة لتفهم الأدوات وتبني برامج تحليل وأتمتة دفاعية بنفسك.",tasks:["تعلم Variables وData Types","افهم If وFor وWhile","تعلم Functions","استخدم Lists وDictionaries","اقرأ واكتب ملفات نصية","تعامل مع Exceptions","تعلم أساسيات Modules وLibraries","أنشئ برنامجًا يحلل ملف سجلات تجريبيًا"],courses:[["CS50's Introduction to Programming with Python","https://cs50.harvard.edu/python/"],["Python Official Tutorial","https://docs.python.org/3/tutorial/"],["freeCodeCamp Python","https://www.freecodecamp.org/learn/scientific-computing-with-python/"]],videos:["Python course for beginners Arabic","شرح Python للمبتدئين بالعربي من الصفر","Python file handling Arabic"]},
+
+{title:"أساسيات الويب وقواعد البيانات",desc:"افهم مكونات مواقع الويب وطريقة انتقال البيانات قبل دراسة تأمين التطبيقات.",tasks:["تعلم HTML وبناء صفحة بسيطة","تعلم CSS وتنسيق الصفحات","افهم أساسيات JavaScript","تعرف على Client وServer","تعلم HTTP Requests وResponses","افهم قواعد البيانات وSQL","تعرف على APIs وJSON","أنشئ موقعًا تجريبيًا بسيطًا"],courses:[["MDN Learn Web Development","https://developer.mozilla.org/en-US/docs/Learn_web_development"],["freeCodeCamp","https://www.freecodecamp.org/learn/"],["W3Schools HTML","https://www.w3schools.com/html/"],["SQLBolt","https://sqlbolt.com/"]],videos:["HTML CSS JavaScript course Arabic","شرح HTTP للمبتدئين بالعربي","SQL للمبتدئين بالعربي"]},
+
+{title:"مبادئ الأمن السيبراني",desc:"تعرف على مفاهيم الحماية وإدارة المخاطر والهوية والتشفير.",tasks:["افهم CIA Triad: السرية والسلامة والتوافر","فرق بين Authentication وAuthorization","افهم Encryption وHashing","تعرف على Threat وVulnerability وRisk","تعلم أساسيات MFA وكلمات المرور الآمنة","افهم التحديثات والنسخ الاحتياطي","تعرف على مبادئ الخصوصية وحماية البيانات","اكتب قائمة لتأمين جهازك الشخصي"],courses:[["Cisco - Introduction to Cybersecurity","https://www.netacad.com/courses/introduction-to-cybersecurity"],["NIST Cybersecurity Framework","https://www.nist.gov/cyberframework"],["CISA Secure Our World","https://www.cisa.gov/secure-our-world"]],videos:["مقدمة الأمن السيبراني بالعربي","شرح CIA Triad بالعربي","Encryption vs Hashing شرح عربي","Cybersecurity fundamentals Arabic"]},
+
+{title:"Web Security وOWASP",desc:"تعلم مبادئ تطوير واختبار تطبيقات ويب آمنة داخل مختبرات تدريبية قانونية.",tasks:["اقرأ نظرة عامة على OWASP Top 10","افهم Broken Access Control","تعرف على Injection كمفهوم دفاعي","افهم Authentication Failures","تعلم مبادئ حماية الجلسات","ابدأ دروس Web Security Academy","تعلم كتابة تقرير يشرح المشكلة والأثر والمعالجة"],courses:[["OWASP Top 10","https://owasp.org/www-project-top-ten/"],["PortSwigger Web Security Academy","https://portswigger.net/web-security"],["OWASP Cheat Sheet Series","https://cheatsheetseries.owasp.org/"]],videos:["OWASP Top 10 شرح عربي","Web security fundamentals Arabic","شرح Burp Suite للمبتدئين في مختبر تدريبي"]},
+
+{title:"مفاهيم الاختبار الأمني المسؤول",desc:"تعرف على خطوات التقييم الأمني وحدود التصريح والتوثيق في مختبرات تعليمية فقط.",tasks:["افهم نطاق التصريح وقواعد الاختبار","تعرف على مراحل التقييم الأمني نظريًا","تعلم قراءة نتائج أدوات الفحص في مختبر تدريبي","تعرف على Nmap من الوثائق الرسمية وبيئة محلية مصرح بها","تعرف على Burp Suite Community في مختبرات Academy","استكشف معامل TryHackMe للمبتدئين","اكتب تقريرًا عن تمرين تدريبي وطرق الإصلاح"],courses:[["TryHackMe Learning Paths","https://tryhackme.com/paths"],["Nmap Reference Guide","https://nmap.org/book/man.html"],["Burp Suite Documentation","https://portswigger.net/burp/documentation"],["OWASP ZAP","https://www.zaproxy.org/getting-started/"]],videos:["Ethical hacking methodology explained Arabic","Nmap basics in a legal lab Arabic","Burp Suite beginner lab Arabic"]},
+
+{title:"Blue Team وSOC Analyst",desc:"تعلم الدفاع والمراقبة وتحليل السجلات واكتشاف الأحداث الأمنية والاستجابة لها.",tasks:["افهم دور محلل SOC","تعلم قراءة وتحليل Logs","افهم SIEM وطرق تجميع الأحداث","ثبت Wazuh في معمل محلي وفق الدليل","استكشف لوحات التنبيهات في Wazuh","تعرف على أساسيات Splunk","افهم Incident Response","استخدم MITRE ATT&CK لفهم أساليب التهديد"],courses:[["Wazuh Documentation","https://documentation.wazuh.com/"],["Splunk Free Training","https://www.splunk.com/en_us/training/free-courses/overview.html"],["MITRE ATT&CK","https://attack.mitre.org/"],["Microsoft Security Learning","https://learn.microsoft.com/en-us/training/security/"]],videos:["SOC Analyst شرح عربي للمبتدئين","SIEM شرح بالعربي","Wazuh installation and beginner tutorial","Incident response fundamentals Arabic"]},
+
+{title:"Cloud وIdentity Security",desc:"تعرف على أساسيات السحابة وإدارة الهوية والصلاحيات وتأمين الخدمات.",tasks:["افهم مفهوم Cloud Computing","تعرف على نماذج IaaS وPaaS وSaaS","ابدأ أساسيات AWS Cloud","تعرف على Microsoft Azure","افهم IAM وLeast Privilege","تعرف على Active Directory ومفاهيم الدومين","تعلم أساسيات حماية الحسابات السحابية"],courses:[["AWS Skill Builder","https://skillbuilder.aws/"],["Microsoft Learn - Azure","https://learn.microsoft.com/en-us/training/azure/"],["Google Cloud Skills Boost","https://www.cloudskillsboost.google/"]],videos:["Cloud computing شرح عربي","AWS cloud practitioner Arabic","Active Directory fundamentals Arabic","IAM cloud security Arabic"]},
+
+{title:"مشاريع التخرج وبناء Portfolio",desc:"حوّل ما تعلمته إلى مشاريع دفاعية موثقة تعرض مهاراتك وتساعدك في بناء ملف أعمال.",tasks:["أنشئ مخطط شبكة منزلية آمنة ووثقه","ابنِ Python Log Analyzer على سجلات تجريبية","جهز تقريرًا تعليميًا عن حماية تطبيق ويب تجريبي","أنشئ معمل مراقبة محلي باستخدام Wazuh","وثق مشروعًا عن تحليل PCAP تدريبي","أنشئ GitHub Portfolio منظمًا","اكتب CV تقنيًا للمبتدئين","ضع خطة تخصص للمرحلة التالية"],courses:[["GitHub Skills","https://skills.github.com/"],["GitHub Docs","https://docs.github.com/"],["NIST Cybersecurity Framework","https://www.nist.gov/cyberframework"]],videos:["How to build a cybersecurity portfolio","GitHub for beginners Arabic","Cybersecurity resume for beginners"]}
+];
+
+const STORAGE_KEY="afCyberAcademyV4";
+let data=loadData(),activeMonth=0;
+
+function loadData(){
+ try{
+  const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if(saved && Array.isArray(saved.done) && saved.notes) return saved;
+  const old=JSON.parse(localStorage.getItem("afCyberAcademyV3"));
+  if(old && Array.isArray(old.done)){
+   localStorage.setItem(STORAGE_KEY,JSON.stringify(old));
+   return old;
+  }
+  return {done:[],notes:{}};
+ }catch(e){return {done:[],notes:{}}}
+}
+
+function saveData(){
+ try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));}
+ catch(e){alert("تعذر الحفظ في المتصفح. جرّب فتح الملف في Chrome أو Edge.");}
+}
+
+function totalTasks(){return curriculum.reduce((s,m)=>s+m.tasks.length,0)}
+function taskKey(m,t){return m+"_"+t}
+
+function stats(){
+ const done=data.done.length,total=totalTasks(),pct=Math.round(done/total*100);
+ document.getElementById("percent").textContent=pct+"%";
+ document.getElementById("completed").textContent=done;
+ document.getElementById("total").textContent=total;
+ document.getElementById("xp").textContent=done*25;
+ document.getElementById("progresslabel").textContent=pct+"% مكتمل";
+ document.getElementById("mainbar").style.width=pct+"%";
+ renderBadges();
+}
+
+function renderMonths(){
+ const q=(document.getElementById("search")?.value||"").trim().toLowerCase();
+ document.getElementById("months").innerHTML=curriculum.map((m,i)=>{
+  const done=m.tasks.filter((t,j)=>data.done.includes(taskKey(i,j))).length;
+  if(q&&!(`${m.title} ${m.desc} ${m.tasks.join(" ")}`.toLowerCase().includes(q)))return "";
+  return `<article class="month">
+  <small>MONTH ${String(i+1).padStart(2,"0")}</small>
+  <h3>${m.title}</h3>
+  <p>${m.desc}</p>
+  <div class="progressline"><div class="progressfill" style="width:${done/m.tasks.length*100}%"></div></div>
+  <div class="monthfoot"><span>${done}/${m.tasks.length} درس</span><span>${Math.round(done/m.tasks.length*100)}%</span></div>
+  <button class="open" onclick="openMonth(${i})">افتح الكورس ←</button>
+  </article>`;
+ }).join("");
+ stats();
+}
+
+function openMonth(i){
+ activeMonth=i;
+ const m=curriculum[i];
+ document.getElementById("home").classList.add("hide");
+ document.getElementById("academy").style.display="block";
+ document.getElementById("monthnumber").textContent="MONTH "+String(i+1).padStart(2,"0");
+ document.getElementById("monthtitle").textContent=m.title;
+ document.getElementById("monthdesc").textContent=m.desc;
+
+ document.getElementById("lessons").innerHTML=m.tasks.map((t,j)=>{
+  const checked=data.done.includes(taskKey(i,j));
+  return `<div class="lesson ${checked?"done":""}">
+  <input type="checkbox" ${checked?"checked":""} aria-label="إكمال الدرس" onchange="toggleTask(${i},${j},this.checked)">
+  <label>${t}</label>
+  <button class="btn" onclick="searchVideo('${encodeURIComponent(t+" شرح عربي")}')">فيديو الدرس</button>
+  </div>`;
+ }).join("");
+
+ document.getElementById("courseLinks").innerHTML=m.courses.map(x=>
+  `<a class="link" href="${x[1]}" target="_blank" rel="noopener">${x[0]} ↗</a>`
+ ).join("");
+
+ document.getElementById("videoLinks").innerHTML=m.videos.map(x=>
+  `<a class="link" href="https://www.youtube.com/results?search_query=${encodeURIComponent(x)}" target="_blank" rel="noopener">${x} ↗</a>`
+ ).join("");
+
+ document.getElementById("notes").value=data.notes[i]||"";
+ updateMonthProgress();
+ clearVideo();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function toggleTask(i,j,checked){
+ const k=taskKey(i,j);
+ data.done=data.done.filter(x=>x!==k);
+ if(checked)data.done.push(k);
+ saveData();
+ const el=document.getElementById("lessons").children[j];
+ el.classList.toggle("done",checked);
+ updateMonthProgress();
+ stats();
+ renderMonths();
+}
+
+function updateMonthProgress(){
+ const m=curriculum[activeMonth];
+ const n=m.tasks.filter((t,j)=>data.done.includes(taskKey(activeMonth,j))).length;
+ document.getElementById("monthprogress").textContent=n+" من "+m.tasks.length+" مكتمل";
+}
+
+function saveNote(){
+ data.notes[activeMonth]=document.getElementById("notes").value;
+ saveData();
+ alert("اتحفظت ملاحظات الشهر على جهازك.");
+}
+
+function goHome(){
+ document.getElementById("academy").style.display="none";
+ document.getElementById("home").classList.remove("hide");
+ window.scrollTo({top:0,behavior:"smooth"});
+ renderMonths();
+}
+
+function searchVideo(q){
+ window.open("https://www.youtube.com/results?search_query="+q,"_blank","noopener");
+}
+
+function getVideoId(url){
+ try{
+  const u=new URL(url);
+  if(u.hostname.includes("youtu.be"))return u.pathname.slice(1).split("/")[0];
+  if(u.hostname.includes("youtube.com")){
+   if(u.pathname==="/watch")return u.searchParams.get("v");
+   const parts=u.pathname.split("/");
+   if(["embed","shorts","live"].includes(parts[1]))return parts[2];
+  }
+ }catch(e){}
+ return null;
+}
+
+function loadVideo(){
+ const url=document.getElementById("videoUrl").value.trim();
+ const id=getVideoId(url);
+ if(!id||!/^[a-zA-Z0-9_-]{6,}$/.test(id)){
+  alert("حط رابط فيديو YouTube صحيح (مش رابط قائمة تشغيل).");
+  return;
+ }
+ document.getElementById("player").innerHTML=
+ `<iframe src="https://www.youtube-nocookie.com/embed/${id}" title="YouTube lesson player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+}
+
+function clearVideo(){
+ document.getElementById("videoUrl").value="";
+ document.getElementById("player").innerHTML=
+ '<div class="playerempty"><div><div style="font-size:40px">▶</div><b>مشغل دروسك</b><p>الصق رابط فيديو YouTube بالأسفل لتشغيله هنا.</p></div></div>';
+}
+
+function renderBadges(){
+ const n=data.done.length,all=totalTasks();
+ const items=[
+ ["🌱","أول درس",n>=1],
+ ["📘","10 دروس",n>=10],
+ ["🛡️","25 درس",n>=25],
+ ["🚀","50 درس",n>=50],
+ ["💎","75 درس",n>=75],
+ ["🏅","100 درس",n>=100],
+ ["🌐","6 أشهر كاملة",curriculum.slice(0,6).every((m,i)=>m.tasks.every((t,j)=>data.done.includes(taskKey(i,j))))],
+ ["👑","إكمال الخطة",n===all]
+ ];
+ document.getElementById("badgegrid").innerHTML=items.map(x=>
+  `<div class="badge ${x[2]?"on":""}"><b>${x[0]}</b>${x[1]}<br><small>${x[2]?"مفتوحة":"مقفولة"}</small></div>`
+ ).join("");
+}
+
+function exportProgress(){
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement("a");
+ a.href=url;
+ a.download="Ahmed-Farouk-Academy-Progress.json";
+ document.body.appendChild(a);
+ a.click();
+ a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+
+function importProgress(event){
+ const file=event.target.files && event.target.files[0];
+ if(!file)return;
+ const reader=new FileReader();
+ reader.onload=()=>{
+  try{
+   const incoming=JSON.parse(reader.result);
+   if(!incoming || !Array.isArray(incoming.done) || typeof incoming.notes!=="object")throw new Error("invalid");
+   data={done:incoming.done.filter(x=>typeof x==="string"),notes:incoming.notes||{}};
+   saveData();
+   renderMonths();
+   if(document.getElementById("academy").style.display==="block")openMonth(activeMonth);
+   alert("تمت استعادة تقدمك بنجاح.");
+  }catch(e){
+   alert("الملف غير صالح أو ليس نسخة احتياطية من الأكاديمية.");
+  }
+  event.target.value="";
+ };
+ reader.readAsText(file);
+}
+
+renderMonths();
+</script>
+</body>
+</html>
